@@ -1,0 +1,20 @@
+clc; clear; close all;
+X=[0 1 2 3 4 5];
+Y=[0 .5 .8 .9 .941176 .961538];
+
+
+for i=1:length(X)-1
+    for j=1:length(X)-i
+        if i==1
+            m(j,i)=(Y(j+1)-Y(j))/(X(j+1)-X(j));
+        else
+            m(j,i)=(m(j+1,i-1)-m(j,i-1))/(X(j+i)-X(j));
+        end
+    end
+end
+a(1,:)=m(1,:);
+PN=@(x) Y(1)+a(1)*(x-X(1))+a(2)*(x-X(1)).*(x-X(2))+a(3)*(x-X(1)).*(x-X(2)).*(x-X(3))+a(4)*(x-X(1)).*(x-X(2)).*(x-X(3)).*(x-X(4))+a(5)*(x-X(1)).*(x-X(2)).*(x-X(3)).*(x-X(4)).*(x-X(5));
+hold on
+plot(X,Y,'OR')
+plot(X,PN(X))
+

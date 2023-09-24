@@ -1,0 +1,1 @@
+# Curso de Tecnologías Avanzadas para Minería 2-2023

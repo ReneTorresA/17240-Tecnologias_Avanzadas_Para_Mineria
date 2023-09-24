@@ -1,0 +1,28 @@
+clc;clear;close all;
+%DATOS
+x=[0 1 2 3 4 5];
+y=[0 .5 .8 .9 .941176 .961538];
+syms t
+Pol=0;
+n=length(x);
+for i=1:n
+    product=y(i);
+    for j=1:n
+        if i~=j
+            product=product*(t-x(j))/(x(i)-x(j));
+        end
+    end
+    Pol=Pol+product;
+end
+% - 1ra Forma
+%polinomio = @(t) (360865181541881*t*(t - 1)*(t - 2)*(t - 3)*(t - 4))/45035996273704960 - (2119339941445027*t*(t - 1)*(t - 2)*(t - 3)*(t - 5))/54043195528445952 + (3*t*(t - 1)*(t - 2)*(t - 4)*(t - 5))/40 - (t*(t - 1)*(t - 3)*(t - 4)*(t - 5))/15 + (t*(t - 2)*(t - 3)*(t - 4)*(t - 5))/48;
+% - 2da Forma con matlabFunction
+polinomio = matlabFunction(Pol);
+x2=0:0.1:5;
+hold on 
+plot(x,y,'or')
+plot(x2,polinomio(x2))
+legend('Datos','Polinomio de Lagrange')
+xlabel('x')
+ylabel('y')
+title('Interpolación Polinomio de Lagrange')
